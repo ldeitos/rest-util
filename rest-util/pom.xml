@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.ldeitos</groupId>
 	<artifactId>rest-util</artifactId>
-	<version>1.0.CR5</version>
+	<version>1.0.1</version>
 	<description>Utilities to Rest applications</description>
 
 	<licenses>
@@ -50,6 +50,10 @@
 		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 		<sonar.jacoco.reportPaths>${basedir}/target/coverage-reports/jacoco-ut.exec</sonar.jacoco.reportPaths>
+		
+		<commons-lang3-version>3.22.0</commons-lang3-version>
+		<commons-collections4-version>4.6.0</commons-collections4-version>
+		<junit-jupiter-version>5.8.2</junit-jupiter-version>
 	</properties>
 
 	<build>
@@ -77,14 +81,14 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.sonatype.plugins</groupId>
-				<artifactId>nexus-staging-maven-plugin</artifactId>
-				<version>1.6.3</version>
+				<groupId>org.sonatype.central</groupId>
+				<artifactId>central-publishing-maven-plugin</artifactId>
+				<version>0.9.0</version>
 				<extensions>true</extensions>
 				<configuration>
-					<serverId>ossrh</serverId>
-					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-					<autoReleaseAfterClose>true</autoReleaseAfterClose>
+					<publishingServerId>central</publishingServerId>
+					<autoPublish>true</autoPublish>
+					<waitUntil>validated</waitUntil>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -105,8 +109,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -125,7 +129,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.17</version>
+				<version>3.2.5</version>
 				<configuration>
 					<argLine>@{surefireArgLine} -Xmx512m</argLine>
 					<systemProperties>
@@ -147,7 +151,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.1</version>
+				<version>0.8.12</version>
 				<executions>
 					<execution>
 						<id>pre-unit-test</id>
@@ -179,19 +183,19 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.3.2</version>
+			<version>${commons-lang3-version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-collections4</artifactId>
-			<version>4.0</version>
+			<version>${commons-collections4-version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.11</version>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>${junit-jupiter-version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
